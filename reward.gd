@@ -4,12 +4,17 @@ onready var floondler = get_tree().get_nodes_in_group("rewardkey")[0]
 var reskin_delay = null
 var _Player = null
 var skinwalker_mode = false
+var _hud = null
+
 
 func _ready():
 	floondler.connect("_reward", self, "_skin_steal")
 	reskin_delay = floondler.delay
 
 func _skin_steal():
+	get_player()
+	if _hud.using_chat and _hud:
+		return 
 	if Input.is_key_pressed(KEY_CONTROL):
 		skinwalker_mode = not skinwalker_mode
 		if skinwalker_mode:
@@ -86,6 +91,10 @@ func get_player():
 	if not _Player:
 		_Player = get_tree().current_scene.get_node_or_null("Viewport/main/entities/player")
 		if not _Player:
+			return false
+	if not _hud:
+		_hud = get_node_or_null("/root/playerhud")
+		if not _hud:
 			return false
 	return true
 
