@@ -4,7 +4,7 @@ extends Node
 onready var _Spawn = preload("res://mods/PurplePuppy-Your_Eternal_Reward/reward.gd").new()
 
 var KeybindsAPI = null
-var debug = true
+var debug = false
 var key_states = {}
 var in_game = false
 var delay = null
